@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthRisk AI - Breast Cancer Risk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-heartbeat">❤️</i>
+                <h1>HealthRisk AI</h1>
+            </div>
+            <p class="tagline">Early disease detection through AI-powered analysis</p>
+        </div>
+    </header>
+
+    <main class="container">
+  <section class="intro-section">
+    <h2>Breast Cancer Risk Assessment</h2>
+    <p>Enter diagnostic parameters for risk analysis.</p>
+  </section>
+
+  <section class="form-section">
+    <div class="form-card">
+      <form action="{{ url_for('cancer') }}" method="POST">
+        <div class="form-info">
+          <h3>Breast Cancer Diagnostic Parameters</h3>
+          <p>Fill in the test results below. These features are extracted from medical images of breast masses.</p>
+        </div>
+
+        <style>
+          .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+          }
+          .form-group {
+            background: #f9f9f9;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+          }
+          .form-group label {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.4rem;
+          }
+          .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+          }
+          .helper-text {
+            font-size: 0.85rem;
+            color: #555;
+            margin-top: 0.3rem;
+            line-height: 1.3;
+          }
+        </style>
+
+        <div class="form-grid">
+          {% set field_info = {
+            "radius_mean": "Mean radius of the cell nuclei (typical: 6–14)",
+            "texture_mean": "Standard deviation of gray-scale values (typical: 10–25)",
+            "perimeter_mean": "Mean perimeter of the mass boundary (typical: 40–100)",
+            "area_mean": "Mean area inside the mass (typical: 200–1000)",
+            "smoothness_mean": "Edge smoothness (values close to 0.1 are normal)",
+            "compactness_mean": "Compactness = (perimeter² / area - 1.0)",
+            "concavity_mean": "Severity of concave portions of the contour",
+            "concave_points_mean": "Number of concave parts in the contour",
+            "symmetry_mean": "Symmetry of the cell shape (0.1–0.3 typical)",
+            "fractal_dimension_mean": "Complexity of the boundary (around 0.05–0.1)",
+            "radius_se": "Error in radius measurement",
+            "texture_se": "Error in texture measurement",
+            "perimeter_se": "Error in perimeter measurement",
+            "area_se": "Error in area measurement",
+            "smoothness_se": "Error in smoothness measurement",
+            "compactness_se": "Error in compactness measurement",
+            "concavity_se": "Error in concavity measurement",
+            "concave_points_se": "Error in concave points measurement",
+            "symmetry_se": "Error in symmetry measurement",
+            "fractal_dimension_se": "Error in fractal dimension measurement",
+            "radius_worst": "Worst (largest) radius (e.g., 10–30)",
+            "texture_worst": "Worst texture measurement",
+            "perimeter_worst": "Worst perimeter measurement",
+            "area_worst": "Worst area measurement (e.g., up to 2500)",
+            "smoothness_worst": "Worst smoothness (e.g., 0.1–0.4)",
+            "compactness_worst": "Worst compactness value",
+            "concavity_worst": "Worst concavity value",
+            "concave_points_worst": "Worst concave point count",
+            "symmetry_worst": "Worst symmetry value",
+            "fractal_dimension_worst": "Worst fractal dimension"
+          } %}
+
+          {% for field, desc in field_info.items() %}
+          <div class="form-group">
+            <label for="{{ field }}">{{ field.replace('_', ' ').title() }}</label>
+            <input
+              type="number"
+              name="{{ field }}"
+              id="{{ field }}"
+              step="0.01"
+              required
+            >
+            <p class="helper-text">{{ desc }}</p>
+          </div>
+          {% endfor %}
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Calculate Risk</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HealthRisk AI. All rights reserved.</p>
+            <p class="disclaimer">This tool is for educational purposes only and does not replace professional medical advice.</p>
+        </div>
+    </footer>
+</body>
+</html>

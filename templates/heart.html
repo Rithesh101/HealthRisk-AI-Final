@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthRisk AI - Heart Risk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-heartbeat">❤️</i>
+                <h1>HealthRisk AI</h1>
+            </div>
+            <p class="tagline">Early disease detection through AI-powered analysis</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="intro-section">
+            <h2>Heart Disease Risk Assessment</h2>
+            <p>Enter your heart-related health parameters below.</p>
+        </section>
+
+        <section class="form-section">
+            <div class="form-card">
+                <form action="{{ url_for('heart') }}" method="POST">
+                    <div class="form-info">
+                        <h3>Health Parameters</h3>
+                        <p>All fields are required for accurate prediction.</p>
+                    </div>
+
+                    <style>
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .form-group {
+    background: #f9f9f9;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+  .form-group label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+  .form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  .helper-text {
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 0.3rem;
+    line-height: 1.3;
+  }
+</style>
+
+<div class="form-grid">
+  {% for label, name in [
+      ("Age (years)", "age"),
+      ("Sex", "sex"),
+      ("Chest Pain Type", "cp"),
+      ("Resting Blood Pressure (mm Hg)", "trestbps"),
+      ("Cholesterol (mg/dL)", "chol"),
+      ("Fasting Blood Sugar > 120 mg/dL", "fbs"),
+      ("Resting ECG Result", "restecg"),
+      ("Max Heart Rate Achieved", "thalach"),
+      ("Exercise‑Induced Angina", "exang"),
+      ("ST Depression (Oldpeak)", "oldpeak"),
+      ("Slope of ST Segment", "slope"),
+      ("Number of Major Vessels Colored", "ca"),
+      ("Thalassemia Type", "thal")
+  ] %}
+    <div class="form-group">
+      <label for="{{ name }}">{{ label }}</label>
+      <input
+        type="number"
+        name="{{ name }}"
+        id="{{ name }}"
+        step="0.01"
+        required
+        {% if name in ['sex','cp','fbs','restecg','exang','slope','ca','thal'] %}
+          min="0" max="3"
+        {% endif %}
+      >
+      <p class="helper-text">
+        {% if name == 'age' %}
+          Enter your age in years.
+        {% elif name == 'sex' %}
+          0 = Female, 1 = Male.
+        {% elif name == 'cp' %}
+          0=Typical heart pain, 1=Atypical, 2=Non‑heart pain, 3=None. Most healthy: 3.
+        {% elif name == 'trestbps' %}
+          Your resting blood pressure. Normal is 90–120 mm Hg.
+        {% elif name == 'chol' %}
+          Total cholesterol. Aim for under 200 mg/dL.
+        {% elif name == 'fbs' %}
+          Fasting sugar >120 mg/dL? 0=No, 1=Yes. Healthy: 0.
+        {% elif name == 'restecg' %}
+          ECG result: 0=Normal, 1=Minor changes, 2=Major issues. Healthy: 0.
+        {% elif name == 'thalach' %}
+          Max heart rate during exercise. Rough max ≈ 220 − age.
+        {% elif name == 'exang' %}
+          Chest pain during exercise? 0=No, 1=Yes. Healthy: 0.
+        {% elif name == 'oldpeak' %}
+          ST depression after stress. Healthy: 0.0–1.0.
+        {% elif name == 'slope' %}
+          ST slope: 0=Upsloping (best), 1=Flat, 2=Downsloping. Healthy: 0.
+        {% elif name == 'ca' %}
+          Vessels colored 0–3. Healthy should be 0.
+        {% elif name == 'thal' %}
+          Blood flow defect: 1=Normal, 2=Fixed, 3=Reversible. Healthy: 1.
+        {% endif %}
+      </p>
+    </div>
+  {% endfor %}
+</div>
+
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Calculate Risk</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HealthRisk AI. All rights reserved.</p>
+            <p class="disclaimer">This tool is for educational purposes only and does not replace professional medical advice.</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HealthRisk AI - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-heartbeat">💊</i>
+                <h1>HealthRisk AI</h1>
+            </div>
+            <p class="tagline">Early disease detection through AI-powered analysis</p>
+        </div>
+    </header>
+
+
+    <main class="container">
+        <section class="intro-section">
+            <h2>Welcome to HealthRisk AI</h2>
+            <p>Select a disease below to assess your risk using our AI models.</p>
+        </section>
+
+        <section class="form-section">
+            <div class="form-card" style="text-align: center;">
+                <a href="/heart" class="btn btn-primary" style="margin: 10px;">Heart Disease Risk</a>
+                <a href="/cancer" class="btn btn-primary" style="margin: 10px;">Breast Cancer Risk</a>
+                <a href="/diabetes" class="btn btn-primary" style="margin: 10px;">Diabetes Risk</a>
+            </div>
+        </section>
+
+<hr>
+
+<section class="disease-info-section">
+    <h2>About the Diseases</h2>
+
+    <div class="info-card">
+        <h3>Heart Disease</h3>
+        <p>
+            Heart disease refers to a range of conditions that affect the heart, including coronary artery disease, heart rhythm problems (arrhythmias), and congenital heart defects.
+            It is one of the leading causes of death worldwide. Major risk factors include high blood pressure, high cholesterol, obesity, smoking, diabetes, poor diet, and lack of exercise.
+        </p>
+        <ul>
+            <li><strong>Common Symptoms:</strong> Chest pain, shortness of breath, fatigue, irregular heartbeat.</li>
+            <li><strong>Preventive Tips:</strong> Healthy diet, regular physical activity, avoiding tobacco, managing stress, and regular health check-ups.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3>Breast Cancer</h3>
+        <p>
+            Breast cancer is a disease in which malignant (cancer) cells form in the tissues of the breast. It can occur in both men and women, though it is far more common in women.
+            Early detection through self-exams and screenings can significantly improve the prognosis.
+        </p>
+        <ul>
+            <li><strong>Common Symptoms:</strong> A lump in the breast, change in breast size or shape, skin dimpling, nipple discharge.</li>
+            <li><strong>Preventive Tips:</strong> Regular screenings, maintaining a healthy weight, limiting alcohol, staying physically active, and knowing your family history.</li>
+        </ul>
+    </div>
+
+    <div class="info-card">
+        <h3>Diabetes</h3>
+        <p>
+            Diabetes is a chronic condition that affects how your body turns food into energy. It occurs when the pancreas doesn't produce enough insulin or the body can't effectively use the insulin it produces.
+            There are mainly two types: Type 1 and Type 2 diabetes.
+        </p>
+        <ul>
+            <li><strong>Common Symptoms:</strong> Frequent urination, extreme thirst, fatigue, blurry vision, slow healing of wounds.</li>
+            <li><strong>Preventive Tips:</strong> Balanced diet, regular exercise, maintaining a healthy weight, monitoring blood sugar, and regular doctor visits.</li>
+        </ul>
+    </div>
+</section>
+
+
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 HealthRisk AI. All rights reserved.</p>
+            <p class="disclaimer">This tool is for educational purposes only and should not replace professional medical advice.</p>
+        </div>
+    </footer>
+</body>
+</html>
